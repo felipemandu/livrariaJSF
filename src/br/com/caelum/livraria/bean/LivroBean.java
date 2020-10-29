@@ -20,7 +20,8 @@ public class LivroBean {
 
 
 	private Livro livro = new Livro();
-	private Integer autorId; 
+	private Integer autorId;
+	private List<Livro> livros; 
 	
 	public Integer getAutorId() {
 		return autorId;
@@ -44,7 +45,10 @@ public class LivroBean {
 	
 	
 	public List<Livro> getLivros() {
-		return livroDao.listaTodos();
+		if (livros == null) {
+			this.livros = livroDao.listaTodos();
+		}
+		return livros;
 	}
 	
 	public List<Autor> getAutoresDoLivro() {
@@ -63,6 +67,7 @@ public class LivroBean {
 		}
 		
 		if (this.livro.getId() == null) {
+			livros.add(livro);
 			livroDao.adiciona(this.livro);
 		} else {
 			livroDao.atualiza(livro);
