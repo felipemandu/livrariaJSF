@@ -42,10 +42,6 @@ public class LivroBean {
 		}
 	}
 	
-	public String formAutor() {
-		System.out.println("Chamando o formulário do Autor");
-		return "autor?faces-redirect=true";
-	}
 	
 	public List<Livro> getLivros() {
 		return livroDao.listaTodos();
@@ -59,7 +55,7 @@ public class LivroBean {
 		return autorDao.listaTodos();
 	}
 
-	public String gravar() {
+	public void gravar() {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
 
 		if (livro.getAutores().isEmpty()) {
@@ -71,23 +67,21 @@ public class LivroBean {
 		} else {
 			livroDao.atualiza(livro);
 		}
-		
-		return "livro?faces-redirect=true";
 
 	}
 	
-	public String excluir(Livro livro) {
+	public void excluir(Livro livro) {
 		livroDao.remove(livro);
-		return "livro?faces-redirect=true";
 	}
 	
-	public String excluirAutor(Autor autor) {
+	public void excluirAutor(Autor autor) {
 		List<Autor> autores = livro.getAutores();
 		if (autores.size() > 1) {
 			autores.remove(autor);
-			livroDao.atualiza(livro);
+			if (livro.getId() != null) {
+				livroDao.atualiza(livro);
+			}
 		}
-		return "livro?faces-redirect=true";
 	}
 	
 	public void alterar(Livro livro) {
