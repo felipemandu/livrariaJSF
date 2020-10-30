@@ -1,5 +1,7 @@
 package br.com.caelum.livraria.dao;
 
+import java.io.Serializable;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -8,7 +10,7 @@ import javax.persistence.criteria.Root;
 
 import br.com.caelum.livraria.modelo.Usuario;
 
-public class UserDAO {
+public class UserDAO implements Serializable{
 	
 	EntityManagerFactory emf = JPAUtil.emf;
 	

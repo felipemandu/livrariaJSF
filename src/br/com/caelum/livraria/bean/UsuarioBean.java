@@ -1,14 +1,20 @@
 package br.com.caelum.livraria.bean;
 
-import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
+
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import br.com.caelum.livraria.dao.UserDAO;
 import br.com.caelum.livraria.modelo.Usuario;
 
-@ManagedBean
-public class UsuarioBean {
+@Named
+@ViewScoped
+public class UsuarioBean implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	private Usuario usuario = new Usuario();
 	
 	private UserDAO userDao = new UserDAO();

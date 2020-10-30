@@ -47,7 +47,7 @@
 						<f:selectItems value="#{livroBean.autores}" var="autor" itemLabel="#{autor.nome}" itemValue="#{autor.id}" />
 					</p:selectOneMenu>
 					<p:commandButton value="Gravar Autor" actionListener="#{livroBean.gravarAutor}" process="@this autor" update="tabelaAutores" /> 
-					<p:commandLink value="Cadastrar novo autor"  action="#{livroBean.formAutor}" update="@all" immediate="true" />
+					<p:commandLink value="Cadastrar novo autor"  action="autor?faces-redirect=true" update="@all" immediate="true" />
 				</p:panelGrid>
 	
 				<p:dataTable value="#{livroBean.autoresDoLivro}"  id="tabelaAutores" var="autor" emptyMessage="Nenhum Autor">
