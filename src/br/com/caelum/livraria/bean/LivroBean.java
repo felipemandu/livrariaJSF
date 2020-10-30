@@ -6,7 +6,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.caelum.livraria.dao.DAO;
-import br.com.caelum.livraria.dao.PopulaBanco;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
 
@@ -16,7 +15,7 @@ public class LivroBean {
 	private DAO<Autor> autorDao = new DAO<Autor>(Autor.class);
 	private DAO<Livro> livroDao = new DAO<Livro>(Livro.class);
 	
-	static PopulaBanco pb = new PopulaBanco();
+
 
 
 	private Livro livro = new Livro();

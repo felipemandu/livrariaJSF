@@ -10,6 +10,8 @@ public class DAO<T> {
 	
 	EntityManagerFactory emf = JPAUtil.emf;
 	
+	static PopulaBanco pb = new PopulaBanco();
+	
 	private final Class<T> classe;
 
 	public DAO(Class<T> classe) {

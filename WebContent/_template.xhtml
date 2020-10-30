@@ -16,8 +16,9 @@
 		    <h:form rendered="#{usuarioLogado != null}">
 			 
 			    <p:menuButton value="Menu">
-			        <p:menuitem value="Livros" action="livro" update="@all"/>
-			        <p:menuitem value="Autor" action="autor" update="@all"/>			        
+			        <p:menuitem value="Livros" action="livro?faces-redirect=true" update="@all"/>
+			        <p:menuitem value="Autor" action="autor?faces-redirect=true" update="@all"/>
+			        <p:menuitem value="Vendas" action="vendas?faces-redirect=true" update="@all"/>			        
 			        <p:separator />
 			        <p:menuitem value="logout" action="#{usuarioBean.logout}"/>
 			    </p:menuButton>
