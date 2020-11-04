@@ -66,7 +66,7 @@
 		
 		<h:form id="formTabelaLivros">
 		<p:dataTable value ="#{livroBean.livros}" var="livro" id="tabelaLivros"
-					rows="3" paginator="true">
+					rows="5" paginator="true">
 			<f:facet name="header">Tabela de Livros</f:facet>
 			<p:column headerText="Título" sortBy="#{livro.titulo}">
 				<h:outputText value="#{livro.titulo}" />
@@ -86,7 +86,7 @@
 			</p:column>	
 			<p:column>
 				<f:facet name="header">Deletar</f:facet>
-				<p:commandButton value="excluir" action="#{livroBean.excluir(livro)}" update="@form" process="@form" />
+				<p:commandButton value="excluir" action="#{livroBean.excluir(livro)}" update="formTabelaLivros:tabelaLivros"  process="@all"/>
 			</p:column>	
 			
 			<p:column>

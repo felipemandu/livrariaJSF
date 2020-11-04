@@ -29,7 +29,7 @@ public class AutorBean implements Serializable{
 		this.autor = autor;
 	}
  
-	public String gravar() {
+	public void gravar() {
 		System.out.println("Gravando autor " + this.autor.getNome());
 		
 		if(autor.getId() == null) {
@@ -38,7 +38,7 @@ public class AutorBean implements Serializable{
 			dao.atualiza(autor);
 		}
 		
-		return "livro?faces-redirect=true";
+		this.autor = new Autor();
 	}
 	
 	public List<Autor> getAutores() {

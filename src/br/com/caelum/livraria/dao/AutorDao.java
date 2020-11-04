@@ -8,8 +8,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.caelum.livraria.modelo.Autor;
+import br.com.caelum.livraria.tx.Transacional;
 
 public class AutorDao implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private EntityManager em;
@@ -20,12 +23,13 @@ public class AutorDao implements Serializable{
 	void init() {
 		this.dao = new DAO<Autor>(Autor.class, em);
 	}
-	
 
+	@Transacional
 	public void adiciona(Autor t) {
 		dao.adiciona(t);
 	}
 
+	@Transacional
 	public void remove(Autor t) {
 		dao.remove(t);
 	}
@@ -46,6 +50,7 @@ public class AutorDao implements Serializable{
 		return dao.contaTodos();
 	}
 
+	@Transacional
 	public List<Autor> listaTodosPaginada(int firstResult, int maxResults) {
 		return dao.listaTodosPaginada(firstResult, maxResults);
 	}

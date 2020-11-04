@@ -31,7 +31,7 @@
 					    <f:ajax event="blur" render="messageEmail" />
 					</p:inputText>
 					<p:message for="email" />
-					<p:commandButton value="Gravar" action="#{autorBean.gravar}" update="@form" process="@form"/>
+					<p:commandButton value="Gravar" action="#{autorBean.gravar}" update="@form :formListaAutores" process="@form"/>
 				</h:panelGrid>
 			</p:fieldset>
 		</h:form>

@@ -17,21 +17,15 @@ public class DAO<T> {
 	}
 
 	public void adiciona(T t) {
-		em.getTransaction().begin();
 		em.persist(t);
-		em.getTransaction().commit();
 	}
 
 	public void remove(T t) {
-		em.getTransaction().begin();
 		em.remove(em.merge(t));
-		em.getTransaction().commit();
 	}
 
 	public void atualiza(T t) {
-		em.getTransaction().begin();
 		em.merge(t);
-		em.getTransaction().commit();
 	}
 
 	public List<T> listaTodos() {
@@ -41,12 +35,10 @@ public class DAO<T> {
 	}
 
 	public T buscaPorId(Integer id) {
-		T instancia = em.find(classe, id);
-		return instancia;
+		return em.find(classe, id);
 	}
 
 	public int contaTodos() {
-		em.getTransaction();
 		long result = (Long) em.createQuery("select count(n) from livro n").getSingleResult();
 		return (int) result;
 	}

@@ -8,9 +8,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.caelum.livraria.modelo.Livro;
+import br.com.caelum.livraria.tx.Transacional;
 
 public class LivroDao implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private EntityManager em;
 
@@ -21,10 +24,12 @@ public class LivroDao implements Serializable {
 		this.dao = new DAO<Livro>(Livro.class, em);
 	}
 
+	@Transacional
 	public void adiciona(Livro t) {
 		dao.adiciona(t);
 	}
 
+	@Transacional
 	public void remove(Livro t) {
 		dao.remove(t);
 	}

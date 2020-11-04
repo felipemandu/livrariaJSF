@@ -80,10 +80,12 @@ public class LivroBean implements Serializable {
 			livroDao.atualiza(livro);
 		}
 
+		this.livro = new Livro();
 	}
 	
 	public void excluir(Livro livro) {
 		livroDao.remove(livro);
+		this.livros = livroDao.listaTodos();
 	}
 	
 	public void excluirAutor(Autor autor) {
