@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.caelum.livraria.dao.UserDAO;
@@ -17,16 +18,16 @@ public class UsuarioBean implements Serializable{
 
 	private Usuario usuario = new Usuario();
 	
-	private UserDAO userDao = new UserDAO();
+	@Inject
+	private UserDAO userDao;
+	
+	@Inject
+	private FacesContext context;
 	
 	public String login() {
-		Usuario usuarioDB = userDao.login(this.usuario);
-		
-		FacesContext context = FacesContext.getCurrentInstance();
-		
-		
-		if (existeUsuario(usuarioDB)) {
-			this.usuario = usuarioDB;
+		Boolean isValidUser = userDao.login(this.usuario);
+			
+		if (isValidUser) {
 			context.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
 			return "livro?faces-redirect=true";
 		} else {
@@ -36,14 +37,10 @@ public class UsuarioBean implements Serializable{
 	}
 	
 	public String logout() {
-		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().remove("usuarioLogado");
 		return "login?faces-redirect=true";
 	}
 
-	private boolean existeUsuario(Usuario usuarioDB) {
-		return usuarioDB != null;
-	}
 
 	public Usuario getUsuario() {
 		return usuario;

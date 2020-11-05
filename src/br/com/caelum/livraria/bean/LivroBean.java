@@ -50,11 +50,8 @@ public class LivroBean implements Serializable {
 		}
 	}
 	
-	
 	public List<Livro> getLivros() {
-		if (livros == null) {
-			this.livros = livroDao.listaTodos();
-		}
+		this.livros = livroDao.listaTodos();
 		return livros;
 	}
 	
@@ -74,10 +71,11 @@ public class LivroBean implements Serializable {
 		}
 		
 		if (this.livro.getId() == null) {
-			livros.add(livro);
 			livroDao.adiciona(this.livro);
+			livros.add(livro);
 		} else {
 			livroDao.atualiza(livro);
+			livros.add(livro);
 		}
 
 		this.livro = new Livro();
@@ -92,16 +90,16 @@ public class LivroBean implements Serializable {
 		List<Autor> autores = livro.getAutores();
 		if (autores.size() > 1) {
 			autores.remove(autor);
-			if (livro.getId() != null) {
-				livroDao.atualiza(livro);
-			}
+		}
+		
+		if (livro.getId() != null) {
+			livroDao.atualiza(livro);
 		}
 	}
 	
 	public void alterar(Livro livro) {
-		this.livro = livro;
-		livroDao.atualiza(livro);
-		
+		this.livro = livroDao.buscaPorId(livro.getId());
+		livroDao.atualiza(this.livro);
 	}
 	
 	public void gravarAutor() {

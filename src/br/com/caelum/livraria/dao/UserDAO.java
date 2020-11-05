@@ -2,34 +2,36 @@ package br.com.caelum.livraria.dao;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
 import br.com.caelum.livraria.modelo.Usuario;
+import br.com.caelum.livraria.tx.Transacional;
 
 public class UserDAO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private EntityManagerFactory emf = JPAUtil.emf;
+	@Inject
+	private EntityManager em;
 	
-	public Usuario login(Usuario usuario) {
-		EntityManager em = emf.createEntityManager();
+	@Transacional
+	public boolean login(Usuario usuario) {
 
-		Usuario usuarioDB = null;
+		TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u " +
+										     "WHERE u.email = :email " +
+										     "AND u.senha = :senha", Usuario.class);
+		query.setParameter("email", usuario.getEmail());
+		query.setParameter("senha", usuario.getSenha());
+		
 		try {
-			TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u " +
-											     "WHERE u.email = :email " +
-											     "AND u.senha = :senha", Usuario.class);
-			query.setParameter("email", usuario.getEmail());
-			query.setParameter("senha", usuario.getSenha());
-			
-			usuarioDB = query.getSingleResult();
+			query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			return false;
 		}
-		return usuarioDB;
+		
+		return true;
 	}
 
 }

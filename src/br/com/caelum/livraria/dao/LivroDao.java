@@ -34,6 +34,7 @@ public class LivroDao implements Serializable {
 		dao.remove(t);
 	}
 
+	@Transacional
 	public void atualiza(Livro t) {
 		dao.atualiza(t);
 	}
